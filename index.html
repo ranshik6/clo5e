@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CLO5E | 2026 Black Edition</title>
+    <title>CLO5E | 2026 Official</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -26,206 +26,183 @@
 
         body { background: var(--bg); color: var(--primary); overflow-x: hidden; }
 
-        /* Navigation */
+        /* --- NAVIGATION --- */
         header {
             position: fixed; top: 0; width: 100%; z-index: 1000;
             padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center;
             background: rgba(0,0,0,0.5); backdrop-filter: var(--glass); border-bottom: 1px solid var(--border);
         }
 
-        .nav-desktop { display: flex; gap: 2rem; list-style: none; }
-        .nav-desktop li { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; cursor: pointer; opacity: 0.5; transition: 0.3s; }
-        .nav-desktop li:hover, .nav-desktop li.active { opacity: 1; color: var(--accent); }
-
-        /* Mobile Bottom Tab Bar */
         .tab-bar {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; height: 64px;
+            width: 90%; max-width: 400px; height: 65px;
             display: flex; justify-content: space-around; align-items: center;
-            border-radius: 100px; z-index: 1000; background: rgba(15,15,15,0.8);
-            backdrop-filter: var(--glass); border: 1px solid var(--border);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            border-radius: 100px; z-index: 1000;
+            background: rgba(15, 15, 15, 0.8); backdrop-filter: var(--glass);
+            border: 1px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
 
-        .tab-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; opacity: 0.5; transition: 0.3s; }
+        .tab-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; opacity: 0.4; transition: 0.3s; }
         .tab-item.active { opacity: 1; color: var(--accent); }
+        .tab-item span { font-size: 9px; font-weight: 800; text-transform: uppercase; margin-top: 4px; }
 
-        /* Layout & Bento */
-        .page { display: none; padding-top: 100px; min-height: 100vh; flex-direction: column; }
-        .active-page { display: flex; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* --- PAGE CONTENT --- */
+        .page { display: none; padding-top: 80px; min-height: 100vh; flex-direction: column; }
+        .active-page { display: flex; }
+        .container { padding: 20px 5% 120px; flex: 1; }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; flex: 1; }
+        /* BENTO HOME */
+        .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 180px; gap: 15px; }
+        .bento-item { border-radius: 30px; position: relative; overflow: hidden; border: 1px solid var(--border); cursor: pointer; }
+        .hero-lg { grid-column: span 4; grid-row: span 2; background: url('https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=1000') center/cover; }
+        .hero-sm { grid-column: span 2; grid-row: span 2; background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800') center/cover; }
+        .hero-info { grid-column: span 2; grid-row: span 2; background: var(--surface); display: flex; flex-direction: column; justify-content: center; padding: 30px; }
 
-        .bento-home { display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; height: 70vh; margin-top: 10px; }
-        .bento-box { border-radius: 30px; position: relative; overflow: hidden; border: 1px solid var(--border); transition: 0.4s; cursor: pointer; }
-        .bento-box:hover { transform: scale(0.99); border-color: #fff; }
-        .feat-1 { background: url('https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=1000') center/cover; }
-        .feat-2 { background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1000') center/cover; }
-        
         .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 30px; display: flex; flex-direction: column; justify-content: flex-end; }
 
-        /* Products */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-top: 20px; }
-        .card { background: var(--surface); border-radius: 20px; border: 1px solid var(--border); overflow: hidden; transition: 0.3s; }
-        .card:hover { border-color: #fff; }
+        /* PRODUCT GRID */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        .card { background: var(--surface); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; transition: 0.3s; }
         .card img { width: 100%; height: 220px; object-fit: cover; }
-        .card-body { padding: 12px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .card-body { padding: 12px; }
 
-        /* Footer Copyright */
+        /* FOOTER */
         footer {
-            padding: 40px 5% 120px; /* Extra bottom padding for mobile tab bar */
+            padding: 40px 5% 120px;
             text-align: center;
             border-top: 1px solid var(--border);
-            margin-top: 50px;
+            margin-top: auto;
         }
-        .copyright-text {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #444;
+        .copyright { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: #444; }
+
+        /* CART BOTTOM SHEET */
+        #cart-sheet {
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 80vh;
+            background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(30px);
+            border-top: 1px solid var(--border); border-radius: 40px 40px 0 0;
+            z-index: 2001; transition: 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+            padding: 40px 5%;
         }
+        #cart-sheet.active { bottom: 0; }
 
-        /* Cart */
-        .cart-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; margin-top: 20px; }
-        .checkout-form { background: #0a0a0a; padding: 25px; border-radius: 30px; border: 1px solid var(--border); height: fit-content; position: sticky; top: 100px; }
-        input { width: 100%; padding: 15px; background: #111; border: 1px solid var(--border); border-radius: 12px; color: #fff; margin-bottom: 10px; }
-        .btn-pay { width: 100%; padding: 18px; border-radius: 100px; border: none; background: #fff; color: #00; font-weight: 800; cursor: pointer; }
+        .btn-main { background: #fff; color: #000; border: none; padding: 16px; border-radius: 100px; font-weight: 800; width: 100%; cursor: pointer; }
+        .hidden { display: none !important; }
 
-        @media (max-width: 900px) {
-            .nav-desktop { display: none; }
-            .bento-home { grid-template-columns: 1fr; height: auto; }
-            .feat-1, .feat-2 { height: 350px; }
-            .cart-layout { grid-template-columns: 1fr; }
+        @media (min-width: 768px) {
+            .hero-lg { grid-column: span 3; grid-row: span 3; }
+            .hero-sm { grid-column: span 1; grid-row: span 2; }
+            .hero-info { grid-column: span 1; grid-row: span 1; }
+            .product-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="font-weight: 800; letter-spacing: 4px; cursor: pointer;" onclick="showPage('home')">CLO5E</div>
-        <ul class="nav-desktop">
-            <li onclick="showPage('home')" id="d-home" class="active">Home</li>
-            <li onclick="showPage('mens')" id="d-mens">Mens</li>
-            <li onclick="showPage('ladies')" id="d-ladies">Ladies</li>
-            <li onclick="showPage('about')" id="d-about">About</li>
-            <li onclick="showPage('contact')" id="d-contact">Contact</li>
-        </ul>
-        <div style="position: relative; cursor: pointer;" onclick="showPage('cart')">
+        <div style="font-weight: 800; letter-spacing: 5px;" onclick="showPage('home')">CLO5E</div>
+        <div style="position: relative; cursor: pointer;" onclick="toggleCart()">
             <i data-lucide="shopping-bag"></i>
-            <span id="badge" style="position: absolute; top:-5px; right:-5px; background: var(--accent); font-size: 8px; width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 800;">0</span>
+            <span id="badge" style="position: absolute; top:-5px; right:-5px; background: var(--accent); font-size: 8px; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 800;">0</span>
         </div>
     </header>
 
     <div class="tab-bar">
-        <div class="tab-item active" id="m-home" onclick="showPage('home')"><i data-lucide="home"></i></div>
-        <div class="tab-item" id="m-mens" onclick="showPage('mens')"><i data-lucide="shirt"></i></div>
-        <div class="tab-item" id="m-ladies" onclick="showPage('ladies')"><i data-lucide="sparkles"></i></div>
-        <div class="tab-item" id="m-cart" onclick="showPage('cart')"><i data-lucide="shopping-cart"></i></div>
+        <div class="tab-item active" id="tab-home" onclick="showPage('home')">
+            <i data-lucide="home"></i><span>Home</span>
+        </div>
+        <div class="tab-item" id="tab-mens" onclick="showPage('mens')">
+            <i data-lucide="zap"></i><span>Mens</span>
+        </div>
+        <div class="tab-item" id="tab-ladies" onclick="showPage('ladies')">
+            <i data-lucide="moon"></i><span>Ladies</span>
+        </div>
+        <div class="tab-item" id="tab-about" onclick="showPage('about')">
+            <i data-lucide="help-circle"></i><span>Info</span>
+        </div>
     </div>
 
-    <main>
-        <section id="view-home" class="page active-page">
-            <div class="container">
-                <div class="bento-home">
-                    <div class="bento-box feat-1" onclick="showPage('mens')">
-                        <div class="overlay">
-                            <p style="color: var(--accent); font-weight: 800; font-size: 0.6rem; letter-spacing: 2px;">COLLECTION 2026</p>
-                            <h1 style="font-size: 2.5rem; line-height: 0.9;">UNREAL <br>CRAFT.</h1>
-                        </div>
-                    </div>
-                    <div class="bento-box feat-2" onclick="showPage('ladies')">
-                        <div class="overlay"><h3>LADIES</h3></div>
+    <main id="page-home" class="page active-page">
+        <div class="container">
+            <div class="bento-grid">
+                <div class="bento-item hero-lg" onclick="showPage('mens')">
+                    <div class="overlay">
+                        <p style="color: var(--accent); font-weight: 800; font-size: 10px; letter-spacing: 3px;">2026 EDITION</p>
+                        <h1 style="font-size: 2.5rem; line-height: 0.9;">UNREAL <br>CRAFT.</h1>
                     </div>
                 </div>
-            </div>
-            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
-        </section>
-
-        <section id="view-shop" class="page">
-            <div class="container">
-                <h2 id="shop-title" style="font-size: 2.5rem; margin-bottom: 20px;">SHOP</h2>
-                <div class="grid" id="grid-data"></div>
-            </div>
-            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
-        </section>
-
-        <section id="view-about" class="page">
-            <div class="container" style="text-align: center; padding-top: 60px;">
-                <h1 style="font-size: 4rem;">STUDIO.</h1>
-                <p style="color: #666; margin-top: 20px; max-width: 600px; margin-inline: auto;">CLO5E is a technical fashion house in Dubai. We design for the digital age, focusing on silhouette and high-performance textiles.</p>
-            </div>
-            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
-        </section>
-
-        <section id="view-contact" class="page">
-            <div class="container">
-                <div style="max-width: 500px; margin: 40px auto; background: var(--surface); padding: 30px; border-radius: 30px; border: 1px solid var(--border);">
-                    <h2>Contact</h2><br>
-                    <input type="text" placeholder="Name">
-                    <input type="email" placeholder="Email">
-                    <button class="btn-pay" style="background: #fff; color: #000;">Send</button>
+                <div class="bento-item hero-sm" onclick="showPage('ladies')">
+                    <div class="overlay"><h3>LADIES</h3></div>
+                </div>
+                <div class="bento-item hero-info">
+                    <p style="font-size: 10px; font-weight: 800; opacity: 0.5;">LOCATION</p>
+                    <p style="font-weight: 600;">Dubai HQ</p>
                 </div>
             </div>
-            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
-        </section>
-
-        <section id="view-cart" class="page">
-            <div class="container">
-                <div class="cart-layout">
-                    <div id="cart-items-list"></div>
-                    <div class="checkout-form">
-                        <h3>Summary</h3><br>
-                        <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 800; margin-bottom: 20px;">
-                            <span>Total</span><span id="total-price">AED 0</span>
-                        </div>
-                        <input type="text" id="cust-name" placeholder="Full Name">
-                        <input type="text" id="cust-addr" placeholder="Address, Dubai">
-                        <button class="btn-pay" onclick="placeOrder()">Order Now</button>
-                    </div>
-                </div>
-            </div>
-            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
-        </section>
+        </div>
+        <footer><p class="copyright">© 2026 REVIVED CLO5E</p></footer>
     </main>
 
+    <main id="page-shop" class="page">
+        <div class="container">
+            <h2 id="shop-title" style="font-size: 3rem; margin-bottom: 20px;">MENS</h2>
+            <div class="product-grid" id="grid-content"></div>
+        </div>
+        <footer><p class="copyright">© 2026 REVIVED CLO5E</p></footer>
+    </main>
+
+    <main id="page-about" class="page">
+        <div class="container" style="text-align: center; padding-top: 50px;">
+            <h1 style="font-size: 3.5rem;">THE STUDIO</h1>
+            <p style="color: #666; margin-top: 20px; max-width: 500px; margin-inline: auto;">CLO5E is a vision of high-performance fashion. Based in the UAE, we engineer garments for a digital-first world.</p>
+        </div>
+        <footer><p class="copyright">© 2026 REVIVED CLO5E</p></footer>
+    </main>
+
+    <div id="cart-sheet">
+        <div style="width: 40px; height: 4px; background: #333; margin: 0 auto 30px; border-radius: 10px;"></div>
+        <h2 style="margin-bottom: 20px;">Your Bag</h2>
+        <div id="cart-list" style="max-height: 45vh; overflow-y: auto;"></div>
+        <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                <span>Total</span><span id="total-val" style="font-weight: 800; font-size: 1.2rem;">AED 0</span>
+            </div>
+            <input type="text" id="cust-name" style="width: 100%; background: #111; border: 1px solid var(--border); padding: 16px; border-radius: 15px; color: white; margin-bottom: 10px;" placeholder="Full Name">
+            <button class="btn-main" onclick="confirmOrder()">Confirm Order</button>
+        </div>
+    </div>
+
     <script>
-        // Database
+        // Generate 50 items
         const db = [];
         for(let i=1; i<=25; i++) db.push({id: i, name: `Men Piece ${i}`, price: 400 + (i*10), cat: 'mens', img: `https://images.unsplash.com/photo-1617137968427-85924c800a22?w=500&sig=${i}`});
-        for(let i=26; i<=50; i++) db.push({id: i, name: `Ladies Piece ${i-25}`, price: 500 + (i*5), cat: 'ladies', img: `https://images.unsplash.com/photo-1539008835757-c68c7d09827a?w=500&sig=${i}`});
+        for(let i=26; i<=50; i++) db.push({id: i, name: `Lady Piece ${i-25}`, price: 500 + (i*5), cat: 'ladies', img: `https://images.unsplash.com/photo-1539008835757-c68c7d09827a?w=500&sig=${i}`});
 
         let cart = [];
 
         function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.querySelectorAll('.tab-item, .nav-desktop li').forEach(i => i.classList.remove('active'));
-
+            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            
             if(page === 'mens' || page === 'ladies') {
-                document.getElementById('view-shop').classList.add('active-page');
-                document.getElementById(`d-${page}`).classList.add('active');
-                document.getElementById(`m-${page}`).classList.add('active');
+                document.getElementById('page-shop').classList.add('active-page');
+                document.getElementById(`tab-${page}`).classList.add('active');
+                document.getElementById('shop-title').innerText = page.toUpperCase();
                 renderShop(page);
             } else {
-                document.getElementById(`view-${page}`).classList.add('active-page');
-                document.getElementById(`d-${page}`)?.classList.add('active');
-                document.getElementById(`m-${page}`)?.classList.add('active');
+                document.getElementById(`page-${page}`).classList.add('active-page');
+                document.getElementById(`tab-${page}`).classList.add('active');
             }
-            if(page === 'cart') renderCart();
             window.scrollTo(0,0);
         }
 
         function renderShop(cat) {
-            const grid = document.getElementById('grid-data');
-            const data = db.filter(x => x.cat === cat);
-            document.getElementById('shop-title').innerText = cat.toUpperCase();
-            grid.innerHTML = data.map(p => `
+            const container = document.getElementById('grid-content');
+            container.innerHTML = db.filter(x => x.cat === cat).map(p => `
                 <div class="card" onclick="addToCart(${p.id})">
                     <img src="${p.img}" loading="lazy">
                     <div class="card-body">
-                        <div><p style="font-size: 10px; font-weight: 800;">${p.name}</p><p style="font-weight: 800;">AED ${p.price}</p></div>
-                        <i data-lucide="plus-circle" style="color: var(--accent); width: 20px;"></i>
+                        <p style="font-size: 11px; font-weight: 800;">${p.name}</p>
+                        <p style="font-size: 12px; font-weight: 800; color: var(--accent);">AED ${p.price}</p>
                     </div>
                 </div>
             `).join('');
@@ -233,35 +210,47 @@
         }
 
         function addToCart(id) {
-            cart.push(db.find(x => x.id === id));
-            document.getElementById('badge').innerText = cart.length;
+            const p = db.find(x => x.id === id);
+            cart.push(p);
+            updateCart();
+            if(!document.getElementById('cart-sheet').classList.contains('active')) toggleCart();
             if (navigator.vibrate) navigator.vibrate(50);
         }
 
-        function renderCart() {
-            const list = document.getElementById('cart-items-list');
-            if(cart.length === 0) { list.innerHTML = "<h4>Bag is empty</h4>"; return; }
+        function toggleCart() {
+            document.getElementById('cart-sheet').classList.toggle('active');
+        }
+
+        function updateCart() {
+            document.getElementById('badge').innerText = cart.length;
+            const list = document.getElementById('cart-list');
             list.innerHTML = cart.map((item, idx) => `
-                <div style="display: flex; gap: 15px; background: var(--surface); padding: 15px; border-radius: 20px; margin-bottom: 10px; align-items: center;">
-                    <img src="${item.img}" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover;">
-                    <div style="flex: 1"><p style="font-weight: 700;">${item.name}</p></div>
-                    <p style="font-weight: 800;">AED ${item.price}</p>
-                    <i data-lucide="x" style="width: 15px; color: red;" onclick="removeFromCart(${idx})"></i>
+                <div style="display:flex; gap:15px; margin-bottom:15px; align-items:center;">
+                    <img src="${item.img}" style="width:50px; height:50px; border-radius:12px; object-fit:cover;">
+                    <div style="flex:1"><p style="font-size:12px; font-weight:700;">${item.name}</p></div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="font-size:12px; font-weight:800;">AED ${item.price}</span>
+                        <i data-lucide="trash-2" style="width:14px; color:red; cursor:pointer;" onclick="removeFromCart(${idx})"></i>
+                    </div>
                 </div>
             `).join('');
             const total = cart.reduce((s, i) => s + i.price, 0);
-            document.getElementById('total-price').innerText = `AED ${total}`;
+            document.getElementById('total-val').innerText = `AED ${total}`;
             lucide.createIcons();
         }
 
-        function removeFromCart(idx) { cart.splice(idx, 1); renderCart(); document.getElementById('badge').innerText = cart.length; }
+        function removeFromCart(idx) {
+            cart.splice(idx, 1);
+            updateCart();
+        }
 
-        function placeOrder() {
-            const n = document.getElementById('cust-name').value;
-            if(!n || cart.length === 0) return alert("Details missing.");
-            alert("Order Success! Delivering to Dubai.");
+        function confirmOrder() {
+            const name = document.getElementById('cust-name').value;
+            if(!name || cart.length === 0) return alert("Please fill in your name and add items.");
+            alert(`Order confirmed for ${name}. 24H Dubai delivery scheduled.`);
             cart = [];
-            document.getElementById('badge').innerText = "0";
+            updateCart();
+            toggleCart();
             showPage('home');
         }
 
