@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CLO5E | 2026 Official</title>
+    <title>CLO5E | Official</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -127,7 +127,7 @@
                 <div class="bento-item hero-lg" onclick="showPage('mens')">
                     <div class="overlay">
                         <p style="color: var(--accent); font-weight: 800; font-size: 10px; letter-spacing: 3px;">2026 EDITION</p>
-                        <h1 style="font-size: 2.5rem; line-height: 0.9;">UNREAL <br>CRAFT.</h1>
+                        <h1 style="font-size: 2.5rem; line-height: 0.9;">Gents</h1>
                     </div>
                 </div>
                 <div class="bento-item hero-sm" onclick="showPage('ladies')">
@@ -135,11 +135,11 @@
                 </div>
                 <div class="bento-item hero-info">
                     <p style="font-size: 10px; font-weight: 800; opacity: 0.5;">LOCATION</p>
-                    <p style="font-weight: 600;">Dubai HQ</p>
+                    <p style="font-weight: 600;">Abu Dhabi HQ</p>
                 </div>
             </div>
         </div>
-        <footer><p class="copyright">© 2026 REVIVED CLO5E</p></footer>
+        <footer><p class="copyright">© 2026 CLO5E</p></footer>
     </main>
 
     <main id="page-shop" class="page">
@@ -147,7 +147,7 @@
             <h2 id="shop-title" style="font-size: 3rem; margin-bottom: 20px;">MENS</h2>
             <div class="product-grid" id="grid-content"></div>
         </div>
-        <footer><p class="copyright">© 2026 REVIVED CLO5E</p></footer>
+        <footer><p class="copyright">© 2026 CLO5E</p></footer>
     </main>
 
     <main id="page-about" class="page">
@@ -155,7 +155,7 @@
             <h1 style="font-size: 3.5rem;">THE STUDIO</h1>
             <p style="color: #666; margin-top: 20px; max-width: 500px; margin-inline: auto;">CLO5E is a vision of high-performance fashion. Based in the UAE, we engineer garments for a digital-first world.</p>
         </div>
-        <footer><p class="copyright">© 2026 REVIVED CLO5E</p></footer>
+        <footer><p class="copyright">© 2026 CLO5E</p></footer>
     </main>
 
     <div id="cart-sheet">
@@ -175,7 +175,7 @@
         // Generate 50 items
         const db = [];
         for(let i=1; i<=25; i++) db.push({id: i, name: `Men Piece ${i}`, price: 400 + (i*10), cat: 'mens', img: `https://images.unsplash.com/photo-1617137968427-85924c800a22?w=500&sig=${i}`});
-        for(let i=26; i<=50; i++) db.push({id: i, name: `Lady Piece ${i-25}`, price: 500 + (i*5), cat: 'ladies', img: `https://images.unsplash.com/photo-1539008835757-c68c7d09827a?w=500&sig=${i}`});
+        for(let i=26; i<=50; i++) db.push({id: i, name: `Lady Piece ${i-25}`, price: 500 + (i*5), cat: 'ladies', img: `https://images.unsplash.com/photo-1617137968427-85924c800a22?w=500&sig=${i}`});
 
         let cart = [];
 
@@ -247,7 +247,7 @@
         function confirmOrder() {
             const name = document.getElementById('cust-name').value;
             if(!name || cart.length === 0) return alert("Please fill in your name and add items.");
-            alert(`Order confirmed for ${name}. 24H Dubai delivery scheduled.`);
+            alert(`Order confirmed for ${name}. delivery is scheduled.`);
             cart = [];
             updateCart();
             toggleCart();
