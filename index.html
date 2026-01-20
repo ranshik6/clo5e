@@ -2,243 +2,230 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CLO5E | 2026 Black Edition</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         :root {
-            --bg: #000000;
-            --surface: rgba(18, 18, 18, 0.75);
+            --bg: #000;
+            --surface: rgba(15, 15, 15, 0.7);
             --accent: #ff3e00;
-            --primary: #ffffff;
-            --border: rgba(255, 255, 255, 0.1);
+            --primary: #fff;
+            --border: rgba(255, 255, 255, 0.08);
             --glass: blur(20px) saturate(180%);
         }
 
-        /* Base & Scrollbar */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-        body { background: var(--bg); color: var(--primary); overflow-x: hidden; line-height: 1.5; }
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
 
-        /* Typography */
-        h1, h2, h3 { font-weight: 800; letter-spacing: -1px; }
+        body { background: var(--bg); color: var(--primary); overflow-x: hidden; }
 
         /* Navigation */
-        nav {
-            position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 5%; background: rgba(0, 0, 0, 0.6); backdrop-filter: var(--glass);
-            z-index: 2000; border-bottom: 1px solid var(--border);
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.5); backdrop-filter: var(--glass); border-bottom: 1px solid var(--border);
         }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links li { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; cursor: pointer; opacity: 0.5; transition: 0.3s; letter-spacing: 1px; }
-        .nav-links li:hover, .nav-links li.active { opacity: 1; color: var(--accent); }
-        .logo { font-weight: 800; letter-spacing: 4px; cursor: pointer; font-size: 1.2rem; }
 
-        /* Mobile Bottom Nav */
-        .mobile-nav { display: none; position: fixed; bottom: 0; width: 100%; background: rgba(10, 10, 10, 0.8); backdrop-filter: var(--glass); border-top: 1px solid var(--border); z-index: 2000; justify-content: space-around; padding: 15px 0; }
+        .nav-desktop { display: flex; gap: 2rem; list-style: none; }
+        .nav-desktop li { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; cursor: pointer; opacity: 0.5; transition: 0.3s; }
+        .nav-desktop li:hover, .nav-desktop li.active { opacity: 1; color: var(--accent); }
 
-        /* Page Management */
-        .page { display: none; padding-top: 100px; min-height: 100vh; animation: slideUp 0.6s cubic-bezier(0.2, 1, 0.3, 1); }
-        .active-page { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+        /* Mobile Bottom Tab Bar */
+        .tab-bar {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px; height: 64px;
+            display: flex; justify-content: space-around; align-items: center;
+            border-radius: 100px; z-index: 1000; background: rgba(15,15,15,0.8);
+            backdrop-filter: var(--glass); border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
 
-        /* BENTO HOME PAGE */
-        .bento-home { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; height: 75vh; margin-top: 20px; }
-        .bento-box { position: relative; border-radius: 35px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
-        .bento-box:hover { transform: scale(0.99); border-color: var(--primary); }
-        .main-feat { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=2000') center/cover; }
-        .bento-side-stack { display: grid; grid-template-rows: 1fr 1fr; gap: 20px; }
-        .ladies-tile { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2000') center/cover; }
-        .studio-tile { background: #111; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .glass-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); padding: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
-        .tag { color: var(--accent); font-weight: 800; letter-spacing: 2px; font-size: 0.7rem; margin-bottom: 5px; }
-        .shop-btn { width: fit-content; margin-top: 15px; padding: 12px 30px; border-radius: 100px; border: none; background: var(--primary); color: black; font-weight: 800; cursor: pointer; }
+        .tab-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; opacity: 0.5; transition: 0.3s; }
+        .tab-item.active { opacity: 1; color: var(--accent); }
 
-        /* BRAND STATS */
-        .brand-stats { display: flex; justify-content: space-between; padding: 80px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-        .stat span { font-size: 3rem; font-weight: 800; display: block; }
-        .stat p { color: #666; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; }
+        /* Layout & Bento */
+        .page { display: none; padding-top: 100px; min-height: 100vh; flex-direction: column; }
+        .active-page { display: flex; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* PRODUCT GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; padding-bottom: 100px; }
-        .card { background: var(--surface); border-radius: 25px; border: 1px solid var(--border); overflow: hidden; backdrop-filter: var(--glass); transition: 0.4s; position: relative; }
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .card-img { width: 100%; height: 380px; object-fit: cover; }
-        .card-info { padding: 1.5rem; display: flex; justify-content: space-between; align-items: flex-end; }
-        .price { font-weight: 800; font-size: 1.1rem; margin-top: 5px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; flex: 1; }
 
-        /* CART & CHECKOUT */
-        .cart-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; margin-top: 20px; padding-bottom: 100px; }
-        .cart-item { display: flex; gap: 1rem; background: var(--surface); padding: 1.5rem; border-radius: 25px; border: 1px solid var(--border); margin-bottom: 1rem; align-items: center; }
-        .cart-item img { width: 80px; height: 80px; border-radius: 15px; object-fit: cover; }
-        .qty-controls { display: flex; align-items: center; gap: 15px; background: #1a1a1a; padding: 5px 15px; border-radius: 100px; }
-        .checkout-card { background: #0a0a0a; padding: 2.5rem; border-radius: 35px; border: 1px solid var(--border); position: sticky; top: 120px; }
-        input { width: 100%; padding: 16px 24px; background: #111; border: 1px solid var(--border); border-radius: 100px; color: white; margin-bottom: 1rem; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--primary); }
-        .btn-pay { width: 100%; padding: 20px; background: var(--primary); color: black; border: none; border-radius: 100px; font-weight: 800; cursor: pointer; font-size: 1rem; }
+        .bento-home { display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; height: 70vh; margin-top: 10px; }
+        .bento-box { border-radius: 30px; position: relative; overflow: hidden; border: 1px solid var(--border); transition: 0.4s; cursor: pointer; }
+        .bento-box:hover { transform: scale(0.99); border-color: #fff; }
+        .feat-1 { background: url('https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=1000') center/cover; }
+        .feat-2 { background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1000') center/cover; }
+        
+        .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 30px; display: flex; flex-direction: column; justify-content: flex-end; }
 
-        /* About & Contact */
-        .content-wrap { text-align: center; max-width: 700px; margin: 0 auto; padding-top: 50px; }
+        /* Products */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-top: 20px; }
+        .card { background: var(--surface); border-radius: 20px; border: 1px solid var(--border); overflow: hidden; transition: 0.3s; }
+        .card:hover { border-color: #fff; }
+        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .card-body { padding: 12px; display: flex; justify-content: space-between; align-items: flex-end; }
 
-        /* Mobile Breakpoints */
+        /* Footer Copyright */
+        footer {
+            padding: 40px 5% 120px; /* Extra bottom padding for mobile tab bar */
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 50px;
+        }
+        .copyright-text {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #444;
+        }
+
+        /* Cart */
+        .cart-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; margin-top: 20px; }
+        .checkout-form { background: #0a0a0a; padding: 25px; border-radius: 30px; border: 1px solid var(--border); height: fit-content; position: sticky; top: 100px; }
+        input { width: 100%; padding: 15px; background: #111; border: 1px solid var(--border); border-radius: 12px; color: #fff; margin-bottom: 10px; }
+        .btn-pay { width: 100%; padding: 18px; border-radius: 100px; border: none; background: #fff; color: #00; font-weight: 800; cursor: pointer; }
+
         @media (max-width: 900px) {
+            .nav-desktop { display: none; }
             .bento-home { grid-template-columns: 1fr; height: auto; }
-            .bento-side-stack { height: 600px; }
+            .feat-1, .feat-2 { height: 350px; }
             .cart-layout { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .mobile-nav { display: flex; }
-            .brand-stats { flex-direction: column; gap: 40px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo" onclick="navigateTo('home')">CLO5E</div>
-        <ul class="nav-links">
-            <li onclick="navigateTo('home')" id="n-home" class="active">Home</li>
-            <li onclick="navigateTo('mens')" id="n-mens">Mens</li>
-            <li onclick="navigateTo('ladies')" id="n-ladies">Ladies</li>
-            <li onclick="navigateTo('about')" id="n-about">About</li>
-            <li onclick="navigateTo('contact')" id="n-contact">Contact</li>
+    <header>
+        <div style="font-weight: 800; letter-spacing: 4px; cursor: pointer;" onclick="showPage('home')">CLO5E</div>
+        <ul class="nav-desktop">
+            <li onclick="showPage('home')" id="d-home" class="active">Home</li>
+            <li onclick="showPage('mens')" id="d-mens">Mens</li>
+            <li onclick="showPage('ladies')" id="d-ladies">Ladies</li>
+            <li onclick="showPage('about')" id="d-about">About</li>
+            <li onclick="showPage('contact')" id="d-contact">Contact</li>
         </ul>
-        <div style="cursor: pointer; position: relative;" onclick="navigateTo('cart')">
+        <div style="position: relative; cursor: pointer;" onclick="showPage('cart')">
             <i data-lucide="shopping-bag"></i>
-            <span id="cart-badge" style="position: absolute; top: -8px; right: -8px; background: var(--accent); font-size: 10px; padding: 2px 6px; border-radius: 50%; font-weight: 800;">0</span>
+            <span id="badge" style="position: absolute; top:-5px; right:-5px; background: var(--accent); font-size: 8px; width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 800;">0</span>
         </div>
-    </nav>
+    </header>
 
-    <div class="mobile-nav">
-        <i data-lucide="home" onclick="navigateTo('home')"></i>
-        <i data-lucide="layers" onclick="navigateTo('mens')"></i>
-        <i data-lucide="info" onclick="navigateTo('about')"></i>
-        <i data-lucide="shopping-cart" onclick="navigateTo('cart')"></i>
+    <div class="tab-bar">
+        <div class="tab-item active" id="m-home" onclick="showPage('home')"><i data-lucide="home"></i></div>
+        <div class="tab-item" id="m-mens" onclick="showPage('mens')"><i data-lucide="shirt"></i></div>
+        <div class="tab-item" id="m-ladies" onclick="showPage('ladies')"><i data-lucide="sparkles"></i></div>
+        <div class="tab-item" id="m-cart" onclick="showPage('cart')"><i data-lucide="shopping-cart"></i></div>
     </div>
 
-    <main class="container">
-        
-        <section id="page-home" class="page active-page">
-            <div class="bento-home">
-                <div class="bento-box main-feat" onclick="navigateTo('mens')">
-                    <div class="glass-overlay">
-                        <p class="tag">Dubai Collection</p>
-                        <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); line-height: 0.9;">UNREAL <br>ENGINEERED.</h1>
-                        <button class="shop-btn">Shop Mens</button>
-                    </div>
-                </div>
-                <div class="bento-side-stack">
-                    <div class="bento-box ladies-tile" onclick="navigateTo('ladies')">
-                        <div class="glass-overlay">
-                            <p class="tag">Editorial</p>
-                            <h3>LADIES</h3>
+    <main>
+        <section id="view-home" class="page active-page">
+            <div class="container">
+                <div class="bento-home">
+                    <div class="bento-box feat-1" onclick="showPage('mens')">
+                        <div class="overlay">
+                            <p style="color: var(--accent); font-weight: 800; font-size: 0.6rem; letter-spacing: 2px;">COLLECTION 2026</p>
+                            <h1 style="font-size: 2.5rem; line-height: 0.9;">UNREAL <br>CRAFT.</h1>
                         </div>
                     </div>
-                    <div class="bento-box studio-tile" onclick="navigateTo('about')">
-                        <div class="glass-overlay">
-                            <h3>THE STUDIO</h3>
-                            <p style="font-size: 0.8rem; opacity: 0.6;">Dubai Design District</p>
-                        </div>
+                    <div class="bento-box feat-2" onclick="showPage('ladies')">
+                        <div class="overlay"><h3>LADIES</h3></div>
                     </div>
                 </div>
             </div>
+            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
+        </section>
 
-            <div class="brand-stats">
-                <div class="stat"><span>24H</span><p>Express UAE</p></div>
-                <div class="stat"><span>50+</span><p>2026 Pieces</p></div>
-                <div class="stat"><span>01</span><p>Boutique Lab</p></div>
+        <section id="view-shop" class="page">
+            <div class="container">
+                <h2 id="shop-title" style="font-size: 2.5rem; margin-bottom: 20px;">SHOP</h2>
+                <div class="grid" id="grid-data"></div>
             </div>
+            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
         </section>
 
-        <section id="page-shop" class="page">
-            <h2 id="shop-title" style="font-size: 3rem; margin-bottom: 20px;">COLLECTION</h2>
-            <div class="grid" id="product-grid"></div>
-        </section>
-
-        <section id="page-about" class="page">
-            <div class="content-wrap">
+        <section id="view-about" class="page">
+            <div class="container" style="text-align: center; padding-top: 60px;">
                 <h1 style="font-size: 4rem;">STUDIO.</h1>
-                <p style="margin-top: 30px; color: #888; line-height: 1.8;">CLO5E is a high-performance fashion house based in Dubai. Established in 2025, we focus on technical silhouettes and luxury fabrications for the 2026 digital era.</p>
+                <p style="color: #666; margin-top: 20px; max-width: 600px; margin-inline: auto;">CLO5E is a technical fashion house in Dubai. We design for the digital age, focusing on silhouette and high-performance textiles.</p>
             </div>
+            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
         </section>
 
-        <section id="page-contact" class="page">
-            <div class="content-wrap" style="text-align: left; background: var(--surface); padding: 40px; border-radius: 40px; border: 1px solid var(--border);">
-                <h2>Get in Touch</h2><br>
-                <input type="text" placeholder="Full Name">
-                <input type="email" placeholder="Email Address">
-                <textarea style="width: 100%; height: 120px; background: #111; border: 1px solid var(--border); border-radius: 20px; color: white; padding: 20px; margin-bottom: 1rem;" placeholder="Your Message"></textarea>
-                <button class="btn-pay" style="background: white;">Send Message</button>
-            </div>
-        </section>
-
-        <section id="page-cart" class="page">
-            <div class="cart-layout">
-                <div id="cart-items-container">
-                    </div>
-                <div class="checkout-card">
-                    <h3 style="margin-bottom: 2rem;">Order Summary</h3>
-                    <div style="display: flex; justify-content: space-between; font-size: 1.5rem; margin-bottom: 2rem; border-top: 1px solid var(--border); padding-top: 20px;">
-                        <span>Total</span>
-                        <span id="cart-total-price">AED 0</span>
-                    </div>
-                    <input type="text" id="ship-name" placeholder="Full Name">
-                    <input type="text" id="ship-address" placeholder="Delivery Address, Dubai">
-                    <input type="text" id="ship-phone" placeholder="+971 Phone Number">
-                    <button class="btn-pay" onclick="placeOrder()">Place Order</button>
+        <section id="view-contact" class="page">
+            <div class="container">
+                <div style="max-width: 500px; margin: 40px auto; background: var(--surface); padding: 30px; border-radius: 30px; border: 1px solid var(--border);">
+                    <h2>Contact</h2><br>
+                    <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email">
+                    <button class="btn-pay" style="background: #fff; color: #000;">Send</button>
                 </div>
             </div>
+            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
         </section>
 
+        <section id="view-cart" class="page">
+            <div class="container">
+                <div class="cart-layout">
+                    <div id="cart-items-list"></div>
+                    <div class="checkout-form">
+                        <h3>Summary</h3><br>
+                        <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 800; margin-bottom: 20px;">
+                            <span>Total</span><span id="total-price">AED 0</span>
+                        </div>
+                        <input type="text" id="cust-name" placeholder="Full Name">
+                        <input type="text" id="cust-addr" placeholder="Address, Dubai">
+                        <button class="btn-pay" onclick="placeOrder()">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            <footer><p class="copyright-text">© CLO5E STUDIOS 2026 - ALL RIGHTS RESERVED</p></footer>
+        </section>
     </main>
 
     <script>
-        // Database: 50 Products
-        const products = [];
-        for(let i=1; i<=25; i++) {
-            products.push({ id: i, name: `Men Tech Piece ${i}`, price: 400 + (i*15), cat: 'mens', img: `https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&sig=${i}` });
-        }
-        for(let i=26; i<=50; i++) {
-            products.push({ id: i, name: `Ladies Silk ${i-25}`, price: 500 + (i*10), cat: 'ladies', img: `https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&sig=${i}` });
-        }
+        // Database
+        const db = [];
+        for(let i=1; i<=25; i++) db.push({id: i, name: `Men Piece ${i}`, price: 400 + (i*10), cat: 'mens', img: `https://images.unsplash.com/photo-1617137968427-85924c800a22?w=500&sig=${i}`});
+        for(let i=26; i<=50; i++) db.push({id: i, name: `Ladies Piece ${i-25}`, price: 500 + (i*5), cat: 'ladies', img: `https://images.unsplash.com/photo-1539008835757-c68c7d09827a?w=500&sig=${i}`});
 
-        let cart = JSON.parse(localStorage.getItem('clo5e_cart_2026')) || [];
+        let cart = [];
 
-        function navigateTo(pageId) {
+        function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.tab-item, .nav-desktop li').forEach(i => i.classList.remove('active'));
 
-            if(pageId === 'mens' || pageId === 'ladies') {
-                document.getElementById('page-shop').classList.add('active-page');
-                document.getElementById(`n-${pageId}`).classList.add('active');
-                renderShop(pageId);
+            if(page === 'mens' || page === 'ladies') {
+                document.getElementById('view-shop').classList.add('active-page');
+                document.getElementById(`d-${page}`).classList.add('active');
+                document.getElementById(`m-${page}`).classList.add('active');
+                renderShop(page);
             } else {
-                document.getElementById(`page-${pageId}`).classList.add('active-page');
-                document.getElementById(`n-${pageId}`)?.classList.add('active');
+                document.getElementById(`view-${page}`).classList.add('active-page');
+                document.getElementById(`d-${page}`)?.classList.add('active');
+                document.getElementById(`m-${page}`)?.classList.add('active');
             }
-            if(pageId === 'cart') renderCart();
-            window.scrollTo(0, 0);
+            if(page === 'cart') renderCart();
+            window.scrollTo(0,0);
         }
 
-        function renderShop(category) {
-            const grid = document.getElementById('product-grid');
-            document.getElementById('shop-title').innerText = category.toUpperCase();
-            const filtered = products.filter(p => p.cat === category);
-            
-            grid.innerHTML = filtered.map(p => `
-                <div class="card">
-                    <img src="${p.img}" class="card-img" loading="lazy">
-                    <div class="card-info">
-                        <div>
-                            <p style="font-weight: 700;">${p.name}</p>
-                            <p class="price">AED ${p.price}</p>
-                        </div>
-                        <div onclick="addToCart(${p.id})" style="background: var(--primary); color: black; padding: 10px; border-radius: 12px; cursor: pointer;">
-                            <i data-lucide="plus" style="width: 18px;"></i>
-                        </div>
+        function renderShop(cat) {
+            const grid = document.getElementById('grid-data');
+            const data = db.filter(x => x.cat === cat);
+            document.getElementById('shop-title').innerText = cat.toUpperCase();
+            grid.innerHTML = data.map(p => `
+                <div class="card" onclick="addToCart(${p.id})">
+                    <img src="${p.img}" loading="lazy">
+                    <div class="card-body">
+                        <div><p style="font-size: 10px; font-weight: 800;">${p.name}</p><p style="font-weight: 800;">AED ${p.price}</p></div>
+                        <i data-lucide="plus-circle" style="color: var(--accent); width: 20px;"></i>
                     </div>
                 </div>
             `).join('');
@@ -246,84 +233,39 @@
         }
 
         function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            const existing = cart.find(item => item.id === id);
-            if(existing) existing.qty++;
-            else cart.push({...product, qty: 1});
-            
-            saveCart();
-            updateBadge();
-            alert(`${product.name} added to bag!`);
+            cart.push(db.find(x => x.id === id));
+            document.getElementById('badge').innerText = cart.length;
+            if (navigator.vibrate) navigator.vibrate(50);
         }
 
         function renderCart() {
-            const container = document.getElementById('cart-items-container');
-            if(cart.length === 0) {
-                container.innerHTML = "<h2>Your bag is empty</h2>";
-                document.getElementById('cart-total-price').innerText = "AED 0";
-                return;
-            }
-
-            container.innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-                    <img src="${item.img}">
-                    <div style="flex: 1">
-                        <h4 style="font-size: 1rem;">${item.name}</h4>
-                        <p style="color: #666; font-size: 0.8rem;">AED ${item.price}</p>
-                    </div>
-                    <div class="qty-controls">
-                        <span onclick="updateQty(${index}, -1)" style="cursor:pointer">-</span>
-                        <span style="font-weight: 800;">${item.qty}</span>
-                        <span onclick="updateQty(${index}, 1)" style="cursor:pointer">+</span>
-                    </div>
-                    <i data-lucide="trash-2" onclick="removeFromCart(${index})" style="width: 18px; color: #ff3e00; cursor: pointer;"></i>
+            const list = document.getElementById('cart-items-list');
+            if(cart.length === 0) { list.innerHTML = "<h4>Bag is empty</h4>"; return; }
+            list.innerHTML = cart.map((item, idx) => `
+                <div style="display: flex; gap: 15px; background: var(--surface); padding: 15px; border-radius: 20px; margin-bottom: 10px; align-items: center;">
+                    <img src="${item.img}" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover;">
+                    <div style="flex: 1"><p style="font-weight: 700;">${item.name}</p></div>
+                    <p style="font-weight: 800;">AED ${item.price}</p>
+                    <i data-lucide="x" style="width: 15px; color: red;" onclick="removeFromCart(${idx})"></i>
                 </div>
             `).join('');
-            
-            const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-            document.getElementById('cart-total-price').innerText = `AED ${total}`;
+            const total = cart.reduce((s, i) => s + i.price, 0);
+            document.getElementById('total-price').innerText = `AED ${total}`;
             lucide.createIcons();
         }
 
-        function updateQty(index, change) {
-            cart[index].qty += change;
-            if(cart[index].qty < 1) cart.splice(index, 1);
-            saveCart();
-            renderCart();
-            updateBadge();
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            saveCart();
-            renderCart();
-            updateBadge();
-        }
-
-        function saveCart() {
-            localStorage.setItem('clo5e_cart_2026', JSON.stringify(cart));
-        }
-
-        function updateBadge() {
-            const count = cart.reduce((s, i) => s + i.qty, 0);
-            document.getElementById('cart-badge').innerText = count;
-        }
+        function removeFromCart(idx) { cart.splice(idx, 1); renderCart(); document.getElementById('badge').innerText = cart.length; }
 
         function placeOrder() {
-            const name = document.getElementById('ship-name').value;
-            if(!name || cart.length === 0) return alert("Please fill in details and add items to cart.");
-            alert(`Success! Thank you ${name}. Your CLO5E order is being processed for Dubai delivery.`);
+            const n = document.getElementById('cust-name').value;
+            if(!n || cart.length === 0) return alert("Details missing.");
+            alert("Order Success! Delivering to Dubai.");
             cart = [];
-            saveCart();
-            updateBadge();
-            navigateTo('home');
+            document.getElementById('badge').innerText = "0";
+            showPage('home');
         }
 
-        // Init
-        window.onload = () => {
-            updateBadge();
-            lucide.createIcons();
-        };
+        window.onload = () => { lucide.createIcons(); };
     </script>
 </body>
 </html>
